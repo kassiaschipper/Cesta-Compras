@@ -1,6 +1,11 @@
 import { StatusBar,SafeAreaView, View } from "react-native";
-import Cesta from "./src/telas/Cesta";
 import { useFonts, Montserrat_400Regular, Montserrat_700Bold } from "@expo-google-fonts/montserrat";
+import * as SplashScreen from "expo-splash-screen";
+
+import mock from "./src/mocks/cesta"
+import Cesta from "./src/telas/Cesta";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [fontCarregada]  = useFonts ({
@@ -9,13 +14,14 @@ export default function App() {
   });
 
   if(!fontCarregada){
-    return <View></View>
+    return null
   }
-
+  
+  SplashScreen.hideAsync()
   return (
     <SafeAreaView>
       <StatusBar />
-      <Cesta />
+      <Cesta {...mock}/>
     </SafeAreaView>
   );
 }
